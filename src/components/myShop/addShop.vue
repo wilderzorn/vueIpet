@@ -1,11 +1,8 @@
 <template>
-  <MyShopShopList/>
+  <div>123123</div>
 </template>
 
 <script>
-export default {
-  name: "myShop"
-};
 </script>
 
 <style>
