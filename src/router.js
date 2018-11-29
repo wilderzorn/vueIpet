@@ -45,6 +45,11 @@ export default new Router({
           component: () => import('./components/myPet/app.vue')
         },
         {
+          path: 'addPet',
+          name: 'addPet',
+          component: () => import('./components/myPet/addPet.vue')
+        },
+        {
           path: 'myService',
           name: 'myService',
           component: () => import('./components/myService/app.vue')

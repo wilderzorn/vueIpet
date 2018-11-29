@@ -15,7 +15,7 @@ export default {
   },
   actions: {
     async getAllShopAsync(context, { curPage = 1, eachPage = 5 } = {}) {
-      let data = await fetch(`/shop/getAllShopByPageAsync?curPage=${curPage}&eachPage=${eachPage}`)   // fetch方法跨域请求数据
+      let data = await fetch(`/shop/getAllPetsByPageAsync?curPage=${curPage}&eachPage=${eachPage}`)   // fetch方法跨域请求数据
         .then(response => response.json())
       context.commit("getAllShop", data)
     }

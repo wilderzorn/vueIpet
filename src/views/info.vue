@@ -15,7 +15,11 @@
         <el-menu-item index="/info/addShop">增加门店</el-menu-item>
       </el-submenu>
       <el-menu-item index="/info/myGoods">我的商品</el-menu-item>
-      <el-menu-item index="/info/myPet">我的宠物</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的宠物</template>
+        <el-menu-item index="/info/myPet">宠物列表</el-menu-item>
+        <el-menu-item index="/info/addPet">增加宠物</el-menu-item>
+      </el-submenu>
       <el-menu-item index="/info/myService">我的服务</el-menu-item>
     </el-menu>
     <router-view></router-view>
