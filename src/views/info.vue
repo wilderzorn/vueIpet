@@ -12,7 +12,11 @@
       <el-menu-item index="/info/myShop">我的门店</el-menu-item>
       <el-menu-item index="/info/myGoods">我的商品</el-menu-item>
       <el-menu-item index="/info/myPet">我的宠物</el-menu-item>
-      <el-menu-item index="/info/myService">我的服务</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title" index="/info/myService">我的服务</template>
+        <el-menu-item index="/info/myService" >我的服务</el-menu-item>
+        <el-menu-item index="/info/addService" >新增服务</el-menu-item>
+      </el-submenu>
     </el-menu>
     <router-view></router-view>
   </div>

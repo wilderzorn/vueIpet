@@ -42,7 +42,13 @@ export default new Router({
         {
           path: 'myService',
           name: 'myService',
-          component: () => import('./components/myService/app.vue')
+          component: () => import('./components/myService/app.vue'),
+       
+        },
+        {
+          path: 'addService',
+          name: 'addService',
+          component: () => import('./components/myService/addService.vue')
         }
       ]
     }
