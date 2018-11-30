@@ -29,11 +29,23 @@ export default new Router({
           name: 'myShop',
           component: () => import('./components/myShop/app.vue')
         },
+        //商品
         {
           path: 'myGoods',
           name: 'myGoods',
-          component: () => import('./components/myGoods/app.vue')
+          component: () => import('./components/myGoods/app.vue'),
         },
+        {
+          path: 'update/:updateId',
+          name: 'updateMygoods',
+          component: () => import('./components/myGoods/update.vue')
+        },
+        {
+          path: 'addTodo',
+          name: 'addTodo',
+          component: () => import('./components/myGoods/addTodo.vue')
+        },
+
         {
           path: 'myPet',
           name: 'myPet',
