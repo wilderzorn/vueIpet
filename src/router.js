@@ -31,6 +31,16 @@ export default new Router({
         },
         //商品
         {
+          path: 'addShop',
+          name: 'addShop',
+          component: () => import('./components/myShop/addShop.vue')
+        },
+        {
+          path: 'employee/:shopId',
+          name: '_employee',
+          component: () => import('./components/myShop/employeeList.vue')
+        },
+        {
           path: 'myGoods',
           name: 'myGoods',
           component: () => import('./components/myGoods/app.vue'),
@@ -54,7 +64,13 @@ export default new Router({
         {
           path: 'myService',
           name: 'myService',
-          component: () => import('./components/myService/app.vue')
+          component: () => import('./components/myService/app.vue'),
+       
+        },
+        {
+          path: 'addService',
+          name: 'addService',
+          component: () => import('./components/myService/addService.vue')
         }
       ]
     }
