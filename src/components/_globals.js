@@ -29,14 +29,6 @@ requireComponent.keys().forEach(fileName => {
         // Remove the file extension from the end
         .replace(/\.\w+$/, '')
     )
-<<<<<<< HEAD
-    // Globally register the component
-    // console.log(componentName)
-    Vue.component(componentName, componentConfig.default || componentConfig)
-=======
   )
-  // Globally register the component
-  // console.log(componentName);
   Vue.component(componentName, componentConfig.default || componentConfig)
->>>>>>> 6666cb7bba96d5931c40275393bcfce18a8213f3
 })
