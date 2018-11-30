@@ -30,6 +30,16 @@ export default new Router({
           component: () => import('./components/myShop/app.vue')
         },
         {
+          path: 'addShop',
+          name: 'addShop',
+          component: () => import('./components/myShop/addShop.vue')
+        },
+        {
+          path: 'employee/:shopId',
+          name: '_employee',
+          component: () => import('./components/myShop/employeeList.vue')
+        },
+        {
           path: 'myGoods',
           name: 'myGoods',
           component: () => import('./components/myGoods/app.vue')
