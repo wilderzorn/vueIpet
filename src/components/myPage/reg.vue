@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card class="box-card">
-      <el-input style=" margin:0 0 0 0" placeholder="请输入你的账号" clearable></el-input>
+      <el-input style=" margin:0 0 0 0" v-model="zh" placeholder="请输入你的账号" clearable></el-input>
       <el-input style=" margin:20px 0 0 0" placeholder="请输入你的密码" clearable></el-input>
       <el-input style=" margin:20px 0 0 0" placeholder="请输入你的邮箱" clearable></el-input>
       <el-input style=" margin:20px 0 0 0" placeholder="请输入你的姓名" clearable></el-input>
@@ -15,17 +15,26 @@
 export default {
   name: "reg",
   data() {
-    return {};
+    return {
+      zh: ""
+    };
   },
   methods: {
     reg() {
-      this.$message({
-        showClose: true,
-        message: "注册成功！！"
-      });
-      this.$router.push({
-      name:"_users"
-      });
+      if (this.zh === "1234") {
+        this.$message({
+          showClose: true,
+          message: "注册成功！！"
+        });
+        this.$router.push({
+          name: "_users"
+        })
+      } else {
+        this.$message({
+          showClose: true,
+          message: "注册失败！！"
+        });
+      }
     }
   }
 };
