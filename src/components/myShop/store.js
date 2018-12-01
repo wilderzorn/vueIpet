@@ -29,6 +29,7 @@ export default {
       context.commit("getAllShop", data)
     },
     async addShopAsync(context, msg) {
+      
       let { shopName, shopLicenceNum, shopLicenceImg, shopAdd, shopLocation, shopCorporate, shopTel, shopImg, shopFeature, shopCommission } = msg
       let data = await fetch(`/shop/addShopAsync?shopName=${shopName}&shopLicenceNum=${shopLicenceNum}&shopLicenceImg=${shopLicenceImg}&shopAdd=${shopAdd}&shopLocation=${shopLocation}&shopCorporate=${shopCorporate}&shopTel=${shopTel}&shopImg=${shopImg}&shopFeature=${shopFeature}&shopCommission=${shopCommission}`)   // fetch方法跨域请求数据
     },

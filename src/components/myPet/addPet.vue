@@ -1,14 +1,14 @@
 <template>
     <div>
-        <el-form ref="form" :model="form" label-width="80px">
+        <el-form ref="form" label-width="80px">
             <div style="display:flex;width:1050px;margin:50px auto">
                 <div  style="width:500px;margin-right:50px">
                     <el-form-item required label="宠物名称">
                         <el-input v-model="form.petsName"></el-input>
-                    </el-form-item>               
-                    <el-form-item required  label="宠物品种">
-                        <el-input v-model="form.petsType"></el-input>
-                    </el-form-item>               
+                    </el-form-item>
+                    <el-form-item required  label="宠物种类">
+                        <el-input v-model="form.petsSpecies"></el-input>
+                    </el-form-item>                                                 
                     <el-form-item required  label="宠物颜色">
                         <el-input v-model="form.petsColor"></el-input>
                     </el-form-item>                                                
@@ -33,8 +33,8 @@
                     <el-form-item required  label="宠物价格">
                         <el-input v-model="form.petsPrice"></el-input>
                     </el-form-item>
-                    <el-form-item required  label="宠物种类">
-                        <el-input v-model="form.petsSpecies"></el-input>
+                    <el-form-item required  label="宠物品种">
+                        <el-input v-model="form.petsType"></el-input>
                     </el-form-item>
                     <el-form-item required label="宠物性别">
                         <el-radio-group v-model="form.petsGender">
@@ -50,14 +50,19 @@
             <div>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm">立即创建</el-button>
-                    <el-button @click="resetForm">重置</el-button>
+                    <el-button @click="resetForm('form')">重置</el-button>
                 </el-form-item>
             </div>
         </el-form>
     </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapMutations, mapActions, mapState } = createNamespacedHelpers(
+  "myPetApp"
+);
 export default {
+  name: "addPet",
   data() {
     return {
       form: {
@@ -74,11 +79,15 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addPetAsync"]),
     submitForm() {
-      alert(123);
+      this.addPetAsync(this.form);
+      console.log(this.form);
+      this.$message("宠物新增成功");
+      this.$router.push({ name: "myPet" });
     },
-    resetForm() {
-      alert(456);
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
   }
 };
