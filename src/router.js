@@ -70,7 +70,6 @@ export default new Router({
           path: 'myService',
           name: 'myService',
           component: () => import('./components/myService/app.vue'),
-       
         },
         {
           path: 'addService',

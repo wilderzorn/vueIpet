@@ -25,12 +25,12 @@ export default {
   },
   actions: {
     async getAllShopAsync(context, { curPage = 1, eachPage = 5 } = {}) {
-      let data = await fetch(`/shop/getAllPetsByPageAsync?curPage=${curPage}&eachPage=${eachPage}`)   // fetch方法跨域请求数据
+      let data = await fetch(`/shop/getAllShopByPageAsync?curPage=${curPage}&eachPage=${eachPage}`)   // fetch方法跨域请求数据
         .then(response => response.json())
       context.commit("getAllShop", data)
     },
     async addShopAsync(context, msg) {
-      
+
       let { shopName, shopLicenceNum, shopLicenceImg, shopAdd, shopLocation, shopCorporate, shopTel, shopImg, shopFeature, shopCommission } = msg
       let data = await fetch(`/shop/addShopAsync?shopName=${shopName}&shopLicenceNum=${shopLicenceNum}&shopLicenceImg=${shopLicenceImg}&shopAdd=${shopAdd}&shopLocation=${shopLocation}&shopCorporate=${shopCorporate}&shopTel=${shopTel}&shopImg=${shopImg}&shopFeature=${shopFeature}&shopCommission=${shopCommission}`)   // fetch方法跨域请求数据
     },
