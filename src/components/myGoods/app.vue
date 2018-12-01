@@ -1,5 +1,5 @@
 <template>
-  <h1>goods</h1>
+  <MyGoodsGoodsList />
 </template>
 
 <script>

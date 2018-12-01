@@ -1,10 +1,12 @@
 <template>
-  <h1>myService</h1>
+  <div>
+    <MyServiceServiceList/>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "myService"
+  name: "MyServiceApp"
 };
 </script>
 
