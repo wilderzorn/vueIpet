@@ -6,7 +6,18 @@ export default {
         eachPage: 5,
         total: 0,
         maxPage: 0,
-        rows: []
+        rows: [],
+        petInfo: {
+            petsName: "",
+            petsSpecies: "",
+            petsGender: "",
+            petsBirthday: "",
+            petsType: "",
+            petsColor: "",
+            petsPrice: "",
+            petsCharacter: "",
+            petsImgs: ""
+        }
     },
     mutations: {
         getAllPets(state, payload) {
@@ -17,7 +28,11 @@ export default {
         },
         setEachPage(state, eachPage) {
             state.eachPage = eachPage
-        }
+        },
+        // 修改
+        uptatePetById(state, payload) {
+            Object.assign(state.petInfo, payload[0]);
+        },
     },
     actions: {
         async getAllPetsAsync(context, { curPage = 1, eachPage = 5 } = {}) {
@@ -33,8 +48,37 @@ export default {
                 },
                 body: JSON.stringify(msg)
             })
-           
+
         },
+        //修改页面显示
+        async updatePetByIdAsync(context, _id) {
+            const data = await fetch(`/pets/updatePetByIdAsync?_id=${_id}`)
+                .then(response => response.json())
+            context.commit("uptatePetById", data)
+        },
+
+        //修改
+        async updatePetAsync(context, msg) {
+            // console.log(msg);
+            const data = await fetch(`/pets/updatePetAsync`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(msg)
+            })
+        },
+        //删除
+        async removePetAsync(context, _id) {
+            const data = await fetch(`/pets/removePetAsync`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(_id)
+            })
+        },
+
     },
     watcher: {
 

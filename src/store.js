@@ -12,19 +12,17 @@ export default new Vuex.Store({
   modules: {
     myShopApp,
     myPetApp,
-    modules: {//module模块化
-      myGoodsApp,
-      myServiceApp,
-      myShopApp
-    },
-    state: {
+    myGoodsApp,
+    myServiceApp
+  },
+  state: {
 
-    },
-    mutations: {
+  },
+  mutations: {
 
-    },
-    actions: {
+  },
+  actions: {
 
-    }
   }
+
 })
