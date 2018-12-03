@@ -7,11 +7,11 @@ import App from "./views/app.vue"
 import StoreLogin from "./views/storeLogin.vue"
 import FlatLogin from "./views/flatLogin.vue"
 //门店连接器
-import storeInfo from "./views/storeinfo.vue"
 import storeReg from "./views/storereg.vue"
 
 //平台连接器
 import flatReg from "./views/flatreg.vue"
+import info from "./views/info.vue"
 
 
 Vue.use(Router)
@@ -51,15 +51,9 @@ export default new Router({
       component: storeReg
     },
     {
-      path: '/storeinfo',
-      name: 'storeInfo',
-      component: storeInfo
-    },
-    //平台登陆注册页面
-    {
-      path: '/flatreg',
-      name: 'flatReg',
-      component: flatReg
+      path: '/info',
+      name: 'info',
+      component: info
     },
     {
       path: '/flatinfo',

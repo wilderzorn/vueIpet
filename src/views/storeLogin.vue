@@ -42,7 +42,7 @@ export default {
         this.loginAsync(users).then(res=>{
           if(res.status){
      this.$router.push({
-            name: "storeInfo",
+            name: "info",
           });
           }else{
       this.$message("账号密码不存在");
