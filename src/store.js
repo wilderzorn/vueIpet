@@ -4,6 +4,7 @@ import myGoodsApp from "./components/myGoods/store.js"
 import myServiceApp from "../src/components/myService/store.js"
 import myShopApp from './components/myShop/store.js'
 import myPetApp from './components/myPet/store.js'
+import myPageApp from './components/myPage/store.js';
 
 import LoginApp from "./views/app.vue"
 import Flat from "./components/flat/flat.vue"
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     myShopApp,
     myPetApp,
     myGoodsApp,
-    myServiceApp
+    myServiceApp,
+    myPageApp
   },
 })

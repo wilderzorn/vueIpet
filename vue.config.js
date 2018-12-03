@@ -1,8 +1,7 @@
 module.exports = {
     devServer: {
-        proxy: 'http://localhost:3000'//跨域
+      proxy: 'http://localhost:3000'//跨域
     }
-}
-
+  }
 
 

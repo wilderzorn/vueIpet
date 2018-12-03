@@ -18,10 +18,28 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+
     {
       path: '/',
-      name: 'app',
-      component: App
+      name: 'users',
+      component: () => import('./views/users.vue')
+    },
+    {
+      path: '/users',
+      name: '_users',
+      component: () => import('./views/users.vue')
+    },
+
+
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./components/myPage/login.vue')
+    },
+    {
+      path: '/reg',
+      name: 'reg',
+      component: () => import('./components/myPage/reg.vue')
     },
     {
       path: '/storelogin/:username',//动态路径
@@ -73,6 +91,7 @@ export default new Router({
         component: () => import(/* webpackChunkName: "about" */ './components/authorizer/authorizer.vue')
       }],
     },
+
     {
       path: '/info',
       name: 'info',
