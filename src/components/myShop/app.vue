@@ -1,5 +1,5 @@
 <template>
-  <h1>myShop</h1>
+  <MyShopShopList/>
 </template>
 
 <script>
