@@ -77,7 +77,65 @@ export default new Router({
         path: "authorizer",
         name: 'authorizer',
         component: () => import(/* webpackChunkName: "about" */ './components/authorizer/authorizer.vue')
-      },
+      }],
+    },
+    {
+      path: '/info',
+      name: 'info',
+      component: () => import('./views/info.vue'),
+      children: [
+        {
+          path: 'myShop',
+          name: 'myShop',
+          component: () => import('./components/myShop/app.vue')
+        },
+        //商品
+        {
+          path: 'addShop',
+          name: 'addShop',
+          component: () => import('./components/myShop/addShop.vue')
+        },
+        {
+          path: 'employee/:shopId',
+          name: '_employee',
+          component: () => import('./components/myShop/employeeList.vue')
+        },
+        {
+          path: 'myGoods',
+          name: 'myGoods',
+          component: () => import('./components/myGoods/app.vue'),
+        },
+        {
+          path: 'update/:updateId',
+          name: 'updateMygoods',
+          component: () => import('./components/myGoods/update.vue')
+        },
+        {
+          path: 'addTodo',
+          name: 'addTodo',
+          component: () => import('./components/myGoods/addTodo.vue')
+        },
+
+        {
+          path: 'myPet',
+          name: 'myPet',
+          component: () => import('./components/myPet/app.vue')
+        },
+        {
+          path: 'addPet',
+          name: 'addPet',
+          component: () => import('./components/myPet/addPet.vue')
+        },
+        {
+          path: 'myService',
+          name: 'myService',
+          component: () => import('./components/myService/app.vue'),
+        },
+        {
+          path: 'addService',
+          name: 'addService',
+          component: () => import('./components/myService/addService.vue')
+        }
       ]
     }
   ]
