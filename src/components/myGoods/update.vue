@@ -113,7 +113,6 @@ export default {
         goodsPrice: this.update.goodsPrice,
         goodsImg: this.update.goodsImg
       };
-      console.log(msg);
       this.getUpdateDataAsync(msg);
     }
   }
