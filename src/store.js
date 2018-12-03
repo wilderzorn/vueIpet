@@ -17,21 +17,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-<<<<<<< HEAD
     LoginApp,
     Flat,
     flatApp,
     StoreregApp,
     StoreLoginAPP,
     FlatLoginApp,
-    AuthorizerApp
-  }
-})
-=======
+    AuthorizerApp,
     myShopApp,
     myPetApp,
     myGoodsApp,
     myServiceApp
   },
 })
->>>>>>> 6c9f88a9c6c13644b47532a27f6b9b5ae585a6f2
