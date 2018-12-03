@@ -20,11 +20,11 @@
       <el-table-column  width="210" align="center" label="操作">
         <template slot-scope="scope">
           <el-button type="text">
-            <el-button size="mini" @click="handleUpdate(scope.row),dialogVisible = true">修改</el-button>
+            <el-button size="mini" @click="handleUpdate(scope.row),dialogFormVisible=true">修改</el-button>
             <el-dialog
               title="修改信息"
               width="75%"
-              :visible.sync="dialogVisible"
+              :visible.sync="dialogFormVisible"
               :before-close="handleClose">
               <div>
                   <el-form :model="form" label-width="80px">
@@ -76,7 +76,7 @@
                       </div>
                       <div>
                           <el-form-item>
-                              <el-button @click="dialogFormVisible = false,handleOK()" type="primary">立即修改</el-button>
+                              <el-button @click="hello" type="primary">立即修改</el-button>
                               <el-button>重置</el-button>
                           </el-form-item>
                       </div>
@@ -163,13 +163,8 @@ export default {
         .catch(_ => {});
     },
 
-    //修改页面显示
-    handleUpdate(row) {
-      this.updatePetByIdAsync(row._id);
-    },
-
-    //确认修改
-    handleOk() {
+    hello() {
+      alert(666);
       let msg = {
         _id: this.petInfo._id,
         petsName: this.petInfo.petsName,
@@ -185,6 +180,29 @@ export default {
       this.updatePetAsync(msg);
       this.getAllPetsAsync();
     },
+    //修改页面显示
+    handleUpdate(row) {
+      this.updatePetByIdAsync(row._id);
+    },
+
+    //确认修改
+    // handleOk() {
+    //   // let msg = {
+    //   //   _id: this.petInfo._id,
+    //   //   petsName: this.petInfo.petsName,
+    //   //   petsSpecies: this.petInfo.petsSpecies,
+    //   //   petsGender: this.petInfo.petsGender,
+    //   //   petsBirthday: this.petInfo.petsBirthday,
+    //   //   petsType: this.petInfo.petsType,
+    //   //   petsColor: this.petInfo.petsColor,
+    //   //   petsPrice: this.petInfo.petsPrice,
+    //   //   petsCharacter: this.petInfo.petsCharacter,
+    //   //   petsImgs: this.petInfo.petsImgs
+    //   // };
+    //   // this.updatePetAsync(msg);
+    //   // this.getAllPetsAsync();
+    //   alert(123);
+    // },
     removePet(row) {
       alert("删除成功");
       this.removePetAsync({ _id: row._id });
