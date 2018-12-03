@@ -1,5 +1,5 @@
 <template>
-  <h1>myPet</h1>
+  <MyPetPetsList/>
 </template>
 
 <script>

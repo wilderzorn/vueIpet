@@ -12,7 +12,7 @@ export default new Router({
       component: () => import('./views/users.vue')
     },
     {
-      path: '/users/',
+      path: '/users',
       name: '_users',
       component: () => import('./views/users.vue')
     },
@@ -39,6 +39,7 @@ export default new Router({
           name: 'myShop',
           component: () => import('./components/myShop/app.vue')
         },
+        //商品
         {
           path: 'addShop',
           name: 'addShop',
@@ -52,17 +53,38 @@ export default new Router({
         {
           path: 'myGoods',
           name: 'myGoods',
-          component: () => import('./components/myGoods/app.vue')
+          component: () => import('./components/myGoods/app.vue'),
         },
+        {
+          path: 'update/:updateId',
+          name: 'updateMygoods',
+          component: () => import('./components/myGoods/update.vue')
+        },
+        {
+          path: 'addTodo',
+          name: 'addTodo',
+          component: () => import('./components/myGoods/addTodo.vue')
+        },
+
         {
           path: 'myPet',
           name: 'myPet',
           component: () => import('./components/myPet/app.vue')
         },
         {
+          path: 'addPet',
+          name: 'addPet',
+          component: () => import('./components/myPet/addPet.vue')
+        },
+        {
           path: 'myService',
           name: 'myService',
-          component: () => import('./components/myService/app.vue')
+          component: () => import('./components/myService/app.vue'),
+        },
+        {
+          path: 'addService',
+          name: 'addService',
+          component: () => import('./components/myService/addService.vue')
         }
       ]
     }

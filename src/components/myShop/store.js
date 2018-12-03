@@ -6,7 +6,8 @@ export default {
     eachPage: 5,
     total: 0,
     maxPage: 0,
-    rows: []
+    rows: [],
+    employeeArr: []
   },
   mutations: {
     getAllShop(state, payload) {
@@ -19,7 +20,7 @@ export default {
       state.eachPage = eachPage
     },
     setShopById(state, payload) {
-      state.rows = payload
+      state.employeeArr = payload[0].shopEmployee
     }
   },
   actions: {
@@ -29,14 +30,32 @@ export default {
       context.commit("getAllShop", data)
     },
     async addShopAsync(context, msg) {
+
       let { shopName, shopLicenceNum, shopLicenceImg, shopAdd, shopLocation, shopCorporate, shopTel, shopImg, shopFeature, shopCommission } = msg
       let data = await fetch(`/shop/addShopAsync?shopName=${shopName}&shopLicenceNum=${shopLicenceNum}&shopLicenceImg=${shopLicenceImg}&shopAdd=${shopAdd}&shopLocation=${shopLocation}&shopCorporate=${shopCorporate}&shopTel=${shopTel}&shopImg=${shopImg}&shopFeature=${shopFeature}&shopCommission=${shopCommission}`)   // fetch方法跨域请求数据
     },
     async setShopByIdAsync(context, shopId) {
-      console.log(shopId);
       let data = await fetch(`/shop/setShopByIdAsync?_id=${shopId.shopId}`)   // fetch方法跨域请求数据
         .then(response => response.json())
       context.commit("setShopById", data)
-    }
+    },
+    async addOneEmployeeByIdAsync(context, msg) {
+      return await fetch(`/shop/addOneEmployeeByIdAsync`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(msg)
+      }).then(res => res)
+    },
+    async updataShopByIdAsync(context, msg) {
+      return await fetch(`/shop/updataShopByIdAsync`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(msg)
+      }).then(res => res)
+    },
   }
 }
