@@ -35,7 +35,7 @@ export default {
       } else {
         let users = {
           userName: this.$route.params.username,
-          userPwd: this.password   
+          userPwd: this.password
         };
         this.flatLoginAsync(users).then(res => {
           if (res.status) {

@@ -18,7 +18,7 @@
                         </el-col>
                     </el-form-item>
                     <el-form-item required  label="宠物图片">
-                        <el-col :span="1">
+                        <!-- <el-col :span="1">
                         <el-upload
                             class="upload-demo"
                             action="https://jsonplaceholder.typicode.com/posts/"
@@ -26,7 +26,20 @@
                             list-type="picture">
                             <el-button size="small" type="primary">点击上传</el-button>
                         </el-upload>
-                        </el-col>
+                        </el-col> -->
+                        <el-upload
+                            action="/imgs/addImg"
+                            v-model="form.petsImgs"
+                            list-type="picture-card"
+                            :on-preview="handlePictureCardPreview"
+                            :on-success="handleAvatarSuccess"
+                            :on-remove="handleRemove"
+                            >
+                            <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="form.petsImgs" alt>
+                            </el-dialog>
                     </el-form-item>
                 </div>
                 <div  style="width:500px;">
@@ -74,8 +87,9 @@ export default {
         petsColor: "",
         petsPrice: "",
         petsCharacter: "",
-        petsImgs: ""
-      }
+        petsImgs: []
+      },
+      dialogVisible: false
     };
   },
   methods: {
@@ -85,6 +99,22 @@ export default {
       console.log(this.form);
       this.$message("宠物新增成功");
       this.$router.push({ name: "myPet" });
+    },
+    //上传图片
+    handlePictureCardPreview(file) {
+      this.form.petsImgs = file.url;
+      this.dialogVisible = true;
+    },
+
+    handleAvatarSuccess(res, file) {
+      // console.log(res);
+      // console.log(file);
+      // this.form.serviceImg = file.response.url;
+      this.form.petsImgs.push({ bigImg: res.url });
+    },
+
+    handleRemove(file, fileList) {
+      // console.log(file, fileList);
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

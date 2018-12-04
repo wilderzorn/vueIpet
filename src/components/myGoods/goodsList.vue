@@ -9,13 +9,12 @@
       <el-table-column prop="goodsSize" label="包装规格" width="80"></el-table-column>
       <el-table-column prop="goodsTaste" label="口味" width="80"></el-table-column>
       <el-table-column prop="goodsSpecial" label="特殊功用" width="80"></el-table-column>
-      <el-table-column prop="goodsRegion" label="产地" width="100"></el-table-column>
+      <el-table-column prop="goodsRegion" label="产地" width="50"></el-table-column>
       <el-table-column prop="goodsDate" label="出厂日期" width="80"></el-table-column>
-      <el-table-column prop="goodsTime" label="保质期" width="80"></el-table-column>
+      <el-table-column prop="goodsTime" label="保质期" width="50"></el-table-column>
       <el-table-column prop="goodsSupplier" label="供应商" width="80"></el-table-column>
       <el-table-column prop="goodsIntro" label="特色说明" width="100"></el-table-column>
       <el-table-column prop="goodsPrice" label="价格" width="50"></el-table-column>
-      <el-table-column prop="goodsImg" label="图片" width="150"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row._id)" type="text" size="small">修改</el-button>
@@ -24,6 +23,7 @@
       </el-table-column>
     </el-table>
 
+     
     <div class="block">
       <el-pagination
         @size-change="handleSizeChange"
@@ -77,6 +77,13 @@ export default {
     handleSizeChange(val) {
       //获取当前页有多少条
       this.setEachPage(val);
+    },
+    //上传图片
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
     }
   },
   watch: {

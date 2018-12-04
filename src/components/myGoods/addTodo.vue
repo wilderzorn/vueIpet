@@ -50,20 +50,27 @@
       </el-form-item>
     </el-form>
 
+    <el-form-item required label="商品图片">
+      <el-upload
+        action="imgs/addImg"
+        list-type="picture-card"
+        :show-file-list="true"
+        :on-preview="handlePictureCardPreview"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+        :limit="2"
+      >
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="form.shopLicenceImg" alt>
+      </el-dialog>
+    </el-form-item>
+
     <el-form-item>
       <el-button type="primary" @click="submitForm(form)">新增</el-button>
       <el-button>取消</el-button>
     </el-form-item>
-
-    <el-upload
-      class="upload-demo"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      list-type="picture"
-    >
-      <el-button size="small" type="primary">点击上传</el-button>
-    </el-upload>
   </el-form>
 </template>
 
@@ -76,6 +83,7 @@ export default {
   name: "addTodo",
   data() {
     return {
+      dialogVisible: false,
       form: {
         goodsName: "",
         goodsType: "",
@@ -89,26 +97,45 @@ export default {
         goodsDate: "",
         goodsTime: "",
         goodsIntro: "",
-        goodsPrice: ""
-      },
-     
+        goodsPrice: "",
+        goodsImg: []
+      }
     };
   },
   mounted() {},
   methods: {
     ...mapActions(["getAddtodoAsync"]),
+
+    beforeAvatarUpload(file) {
+      //上传的图片的条件
+      const isHeadJPG = file.type === "image/jpeg"; // 图片格式
+      const isHeadLt2M = file.size / 1024 / 1024 < 2; // 图片大小
+      if (!isHeadJPG) {
+        this.$message.error("上传图片只能是 JPG 格式!");
+      }
+      if (!isHeadLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isHeadJPG && isHeadLt2M;
+    },
+    handlePictureCardPreview(file) {
+      //
+      // this.form.goodsImg = file.url;
+      this.headDialogVisible = true;
+    },
+    handleAvatarSuccess(res, file) {
+      console.log(res);
+      console.log(file);
+      this.form.goodsImg.push({ bigImg: res.url });
+      this.form.goodsImg.push({ smallImg: res.url });
+    },
     submitForm(form) {
       // console.log(this.getAddtodoAsync(form));
 
       //   console.log(this.data.form);
+      console.log(form);
+      
       this.getAddtodoAsync(form);
-    },
-    //上传图片
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
     }
   }
 };
