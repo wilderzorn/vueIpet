@@ -52,11 +52,21 @@ export default {
         },
         //把新增的数据增加到数据库
         async getAddtodoAsync(context, form) {
-            let { goodsName, goodsType, goodsMaterial, goodsCanFor, goodsOnlyFor, goodsSize, goodsTaste, goodsSpecial, goodsRegion, goodsDate
-                , goodsTime, goodsSupplier, goodsIntro, goodsPrice } = form
-            const data = await fetch(`/goods/getAddtodo?goodsName=${goodsName}&goodsType=${goodsType}&goodsMaterial=${goodsMaterial}&goodsCanFor=${goodsCanFor}&goodsOnlyFor=${goodsOnlyFor}&goodsSize=${goodsSize}&goodsTaste=${goodsTaste}&goodsSpecial=${goodsSpecial}&goodsRegion=${goodsRegion}&goodsDate=${goodsDate}&goodsTime=${goodsTime}&goodsSupplier=${goodsSupplier}&goodsIntro=${goodsIntro}&goodsPrice=${goodsPrice}`)//fetch往数据库放数据
-            return data
+            console.log(form);
+            const data = await fetch(`/goods/getAddtodo`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(form)
+            })
         },
+        // async getAddtodoAsync(context, form) {
+        //     let { goodsName, goodsType, goodsMaterial, goodsCanFor, goodsOnlyFor, goodsSize, goodsTaste, goodsSpecial, goodsRegion, goodsDate
+        //         , goodsTime, goodsSupplier, goodsIntro, goodsPrice,goodsImg } = form
+        //     const data = await fetch(`/goods/getAddtodo?goodsImg=${goodsImg}&goodsName=${goodsName}&goodsType=${goodsType}&goodsMaterial=${goodsMaterial}&goodsCanFor=${goodsCanFor}&goodsOnlyFor=${goodsOnlyFor}&goodsSize=${goodsSize}&goodsTaste=${goodsTaste}&goodsSpecial=${goodsSpecial}&goodsRegion=${goodsRegion}&goodsDate=${goodsDate}&goodsTime=${goodsTime}&goodsSupplier=${goodsSupplier}&goodsIntro=${goodsIntro}&goodsPrice=${goodsPrice}`)//fetch往数据库放数据
+        //     return data
+        // },
         //把要修改的id的相应数据请求回来
         async getUpdateByPageAsync(context, updateId) {//把要查询的条件传过去，拿到相应的数据
             const data = await fetch(`/goods/updateGoods?updateId=${updateId}`)//fetch跨域请求数据
