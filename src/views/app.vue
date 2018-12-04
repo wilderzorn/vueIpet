@@ -1,19 +1,18 @@
 <template>
-<el-card class="box-card">
- <div slot="header" class="clearfix">
-        <span>欢迎光临</span>
-      </div>
-           <el-form class="box-but">
-          <el-form-item >
-          <el-button type="primary"  @click="storeLogin" >门店注册登陆入口</el-button>
-          </el-form-item>
-          <el-form-item>
-          <el-button type="primary" @click="flatLogin">平台注册登陆入口</el-button>
-          </el-form-item>
-          <el-form-item>
-          </el-form-item>
-        </el-form>
-</el-card>
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span>欢迎光临</span>
+    </div>
+    <el-form class="box-but">
+      <el-form-item>
+        <el-button type="primary" @click="storeLogin">门店注册登陆入口</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="flatLogin">平台注册登陆入口</el-button>
+      </el-form-item>
+      <el-form-item></el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
