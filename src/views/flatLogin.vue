@@ -31,7 +31,7 @@ export default {
      ...mapActions(["flatLoginAsync"]), //获取异步方法
     flatInfo() {
       if (this.password === "" || this.$route.params.username === "") {
-        this.$message("账号或密码不为空");
+        this.$message("账号或者密码不能为空");
       }else{
         let users={
           userName:this.$route.params.username,
