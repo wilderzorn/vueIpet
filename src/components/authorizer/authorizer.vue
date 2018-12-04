@@ -1,56 +1,36 @@
 <template>
-    <div>
-     <el-table
-        :data="rows"
-        style="width: 100%">
-        <el-table-column
-          prop="_id"
-          label="学生编号">
-        </el-table-column>
-        <el-table-column
-          prop="userName"
-          label="姓名">
-        </el-table-column>
-        <el-table-column
-          prop="userPwd"
-          label="密码">
-        </el-table-column>
-        <el-table-column
-          prop="userMail"
-          label="邮箱">
-        </el-table-column>
-        <el-table-column
-          prop="userPhone"
-          label="联系方式">
-        </el-table-column>
-        <el-table-column
-          prop="userAcount"
-          label="姓名">
-        </el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <div v-if="scope.row.userStatus === 0">
-                <el-button  size="mini" @click="agreeBtn(scope.row)">同意授权</el-button>
-                <el-button size="mini" type="danger" @click="vetoBtn(scope.row)">授权否决</el-button>
-              </div>
-              <span v-else-if="scope.row.userStatus === 1">已同意</span>
-              <span v-else>已否决</span>
-            </template>
+  <div>
+    <el-table :data="rows" style="width: 100%">
+      <el-table-column prop="_id" label="学生编号"></el-table-column>
+      <el-table-column prop="userName" label="姓名"></el-table-column>
+      <el-table-column prop="userPwd" label="密码"></el-table-column>
+      <el-table-column prop="userMail" label="邮箱"></el-table-column>
+      <el-table-column prop="userPhone" label="联系方式"></el-table-column>
+      <el-table-column prop="userAcount" label="姓名"></el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <div v-if="scope.row.userStatus === 0">
+            <el-button size="mini" @click="agreeBtn(scope.row)">同意授权</el-button>
+            <el-button size="mini" type="danger" @click="vetoBtn(scope.row)">授权否决</el-button>
+          </div>
+          <span v-else-if="scope.row.userStatus === 1">已同意</span>
+          <span v-else>已否决</span>
+        </template>
       </el-table-column>
     </el-table>
 
-      <div class="block">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="curPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="eachPage"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-        </el-pagination>
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="curPage"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="eachPage"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
     </div>
- </div>
+  </div>
 </template>
 
 <script>

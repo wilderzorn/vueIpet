@@ -11,7 +11,6 @@ import storeReg from "./views/storereg.vue"
 
 //平台连接器
 import flatReg from "./views/flatreg.vue"
-import info from "./views/info.vue"
 
 
 Vue.use(Router)
@@ -20,7 +19,7 @@ export default new Router({
   routes: [
 
     {
-      path: '/',
+      path: '/member',
       name: 'users',
       component: () => import('./views/users.vue')
     },
@@ -42,23 +41,23 @@ export default new Router({
       component: () => import('./components/myPage/reg.vue')
     },
     {
-      path: '/storelogin/:username',//动态路径
+      path: '/storelogin/:username',// 门店登录动态路径
       name: '_storelogin',
       component: StoreLogin
     },
     {
-      path: '/flatlogin/:username',//动态路径
+      path: '/flatlogin/:username',//平台登录动态路径
       name: '_flatlogin',
       component: FlatLogin
     },
     //门店 平台入口
     {
-      path: '/storelogin',
+      path: '/',
       name: 'storeLogin',
       component: StoreLogin
     },
     {
-      path: '/flatlogin',
+      path: '/flatlogin',     // 平台
       name: 'flatLogin',
       component: FlatLogin
     },
@@ -67,11 +66,6 @@ export default new Router({
       path: '/storereg',
       name: 'storeReg',
       component: storeReg
-    },
-    {
-      path: '/info',
-      name: 'info',
-      component: info
     },
     {
       path: '/flatinfo',
@@ -91,7 +85,6 @@ export default new Router({
         component: () => import(/* webpackChunkName: "about" */ './components/authorizer/authorizer.vue')
       }],
     },
-
     {
       path: '/info',
       name: 'info',
@@ -112,6 +105,11 @@ export default new Router({
           path: 'employee/:shopId',
           name: '_employee',
           component: () => import('./components/myShop/employeeList.vue')
+        },
+        {
+          path: 'goodsList/:shopId',
+          name: '_goodsList',
+          component: () => import('./components/myShop/goodsList.vue')
         },
         {
           path: 'myGoods',

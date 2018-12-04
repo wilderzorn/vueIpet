@@ -1,18 +1,48 @@
 <template>
   <div>
     <el-table :data="rows" stripe style="width: 100%">
-      <el-table-column prop="_id" label="ID"></el-table-column>
       <el-table-column prop="shopName" label="名称"></el-table-column>
       <el-table-column prop="shopLicenceNum" label="营业执照号码"></el-table-column>
+      <el-table-column prop="shopLicenceImg" label="营业执照照片">
+        <template slot-scope="scope">
+          <el-button @click="shopLicenceImgClick(scope.row)" type="text" size="big">查看营业执照照片</el-button>
+          <el-dialog title="营业执照照片" width="100" :visible.sync="shopLicenceImgVisible">
+            <img :src="rows.shopLicenceImg" alt>
+          </el-dialog>
+        </template>
+      </el-table-column>
       <el-table-column prop="shopAdd" label="营业地址"></el-table-column>
       <el-table-column prop="shopLocation" label="定位"></el-table-column>
       <el-table-column prop="shopCorporate" label="法人"></el-table-column>
       <el-table-column prop="shopTel" label="联系电话"></el-table-column>
+      <el-table-column prop="shopImg" label="门店图片">
+        <template slot-scope="scope">
+          <el-button @click="shopImgClick(scope.row)" type="text" size="big">查看门店图片</el-button>
+          <el-dialog title="门店图片" width="100" :visible.sync="shopImgVisible">
+            <img :src="rows.shopImg" alt>
+          </el-dialog>
+        </template>
+      </el-table-column>
       <el-table-column prop="shopFeature" label="特色"></el-table-column>
       <el-table-column prop="shopCommission" label="佣金比例"></el-table-column>
       <el-table-column label="店员">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="big">查看店员</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="商品">
+        <template slot-scope="scope">
+          <el-button @click="goodsClick(scope.row)" type="text" size="big">查看商品</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="服务">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="big">查看服务</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="宠物">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="big">查看宠物</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作">
@@ -70,21 +100,8 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="block">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="curPage"
-        :page-sizes="[5, 10, 15, 20]"
-        :page-size="eachPage"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        :page-count="maxPage"
-      ></el-pagination>
-    </div>
   </div>
 </template>
-
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapMutations, mapActions, mapState } = createNamespacedHelpers(
@@ -94,12 +111,16 @@ export default {
   name: "shopList",
   data() {
     return {
+      id: "",
+      shopLicenceImgVisible: false,
+      shopImgVisible: false,
       dialogTableVisible: false,
       dialogFormVisible: false,
       form: {
         _id: "",
         shopName: "",
         shopLicenceNum: "",
+        shopLicenceImg: "",
         shopAdd: "",
         shopLocation: "",
         shopCorporate: "",
@@ -109,24 +130,21 @@ export default {
       }
     };
   },
+  beforeMount() {
+    this.id = JSON.parse(localStorage.user)._id; // 门店管理员ID
+  },
   // 加载完成阶段
   mounted() {
-    this.getAllShopAsync();
+    this.getAllUser(this.id);
   },
   computed: {
-    ...mapState(["curPage", "eachPage", "total", "maxPage", "rows"])
+    ...mapState(["rows"])
   },
   methods: {
-    ...mapActions(["getAllShopAsync", "updataShopByIdAsync"]),
+    ...mapActions(["getAllShopAsync", "updataShopByIdAsync", "getAllUser"]),
     ...mapMutations(["setCurPage", "setEachPage"]),
     handleClick(shop) {
       this.$router.push({ name: "_employee", params: { shopId: shop._id } });
-    },
-    handleCurrentChange(val) {
-      this.setCurPage(val);
-    },
-    handleSizeChange(val) {
-      this.setEachPage(val);
     },
     ensure(row) {
       this.form._id = row._id;
@@ -143,19 +161,18 @@ export default {
     async handleOK() {
       let data = await this.updataShopByIdAsync(this.form);
       if (data.status === 200) {
-        this.getAllShopAsync();
+        this.getAllUser(this.id);
       }
-    }
-  },
-  watch: {
-    curPage() {
-      this.getAllShopAsync({
-        curPage: this.curPage,
-        eachPage: this.eachPage
-      });
     },
-    eachPage() {
-      this.getAllShopAsync({ eachPage: this.eachPage });
+    shopLicenceImgClick(data) {
+      console.log(data);
+      this.shopLicenceImgVisible = true;
+    },
+    shopImgClick(data) {
+      this.shopImgVisible = true;
+    },
+    goodsClick(data) {
+      this.$router.push({ name: "_goodsList", params: { shopId: data._id } });
     }
   }
 };

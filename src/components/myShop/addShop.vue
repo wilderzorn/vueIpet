@@ -7,7 +7,20 @@
       <el-input v-model="form.shopLicenceNum"></el-input>
     </el-form-item>
     <el-form-item required label="营业执照图片">
-      <el-input v-model="form.shopLicenceImg"></el-input>
+      <el-upload
+        action="imgs/addImg"
+        list-type="picture-card"
+        :show-file-list="true"
+        :on-preview="handlePictureCardPreview"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+        :limit="1"
+      >
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="form.shopLicenceImg" alt>
+      </el-dialog>
     </el-form-item>
     <el-form-item required label="营业地址">
       <el-input v-model="form.shopAdd"></el-input>
@@ -22,7 +35,20 @@
       <el-input v-model="form.shopTel"></el-input>
     </el-form-item>
     <el-form-item required label="头图">
-      <el-input v-model="form.shopImg"></el-input>
+      <el-upload
+        action="imgs/addImg"
+        list-type="picture-card"
+        :show-file-list="true"
+        :on-preview="headPictureCardPreview"
+        :on-success="headAvatarSuccess"
+        :before-upload="headEeforeAvatarUpload"
+        :limit="1"
+      >
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <el-dialog :visible.sync="headDialogVisible">
+        <img width="100%" :src="form.shopImg" alt>
+      </el-dialog>
     </el-form-item>
     <el-form-item required label="特色">
       <el-input v-model="form.shopFeature"></el-input>
@@ -48,6 +74,8 @@ export default {
   name: "addShop",
   data() {
     return {
+      dialogVisible: false,
+      headDialogVisible: false,
       form: {
         shopName: "",
         shopLicenceNum: "",
@@ -65,11 +93,55 @@ export default {
   methods: {
     ...mapActions(["addShopAsync"]),
     addShop(form) {
-      this.addShopAsync(form);
-      this.$message("门店增加成功");
-      this.$router.push({ name: "myShop" });
+      if (form.shopLicenceImg === "") {
+        this.$message.error("请上传营业执照图片");
+      } else if (form.shopImg === "") {
+        this.$message.error("请上传门店图片");
+      } else {
+        this.addShopAsync(form);
+        this.$message("门店增加成功");
+        this.$router.push({ name: "myShop" });
+      }
     },
-    cancel() {}
+    cancel() {},
+    handlePictureCardPreview(file) {
+      this.form.shopLicenceImg = file.url;
+      this.dialogVisible = true;
+    },
+    handleAvatarSuccess(res, file) {
+      this.form.shopLicenceImg = file.response.url;
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg"; // 图片格式
+      const isLt2M = file.size / 1024 / 1024 < 10; // 图片大小
+      if (!isJPG) {
+        this.$message.error("上传图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 10MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    headEeforeAvatarUpload(file) {
+      const isHeadJPG = file.type === "image/jpeg"; // 图片格式
+      const isHeadLt2M = file.size / 1024 / 1024 < 2; // 图片大小
+      if (!isHeadJPG) {
+        this.$message.error("上传图片只能是 JPG 格式!");
+      }
+      if (!isHeadLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isHeadJPG && isHeadLt2M;
+    },
+    headPictureCardPreview(file) {
+      this.form.shopImg = file.url;
+      this.headDialogVisible = true;
+    },
+    headAvatarSuccess(res, file) {
+      console.log(res);
+      console.log(file);
+      this.form.shopImg = res.url;
+    }
   }
 };
 </script>

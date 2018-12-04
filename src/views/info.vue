@@ -2,7 +2,7 @@
   <div>
     <div class="line"></div>
     <div v-bind:style="{ backgroundColor: color1}">
-      <h2>爱宠帮门店管理</h2>
+      <h2>{{this.userName}}爱宠帮门店管理</h2>
       <h3>ipet Management</h3>
     </div>
     <div style="display: flex;justify-content: space-between;height:100%;">
@@ -68,6 +68,8 @@ export default {
   name: "info",
   data() {
     return {
+      _id: "",
+      userName: "",
       isCollapse: true,
       color1: "rgba(19, 206, 102, 0.8)"
     };
@@ -82,6 +84,10 @@ export default {
     changeColor() {
       console.log(color1);
     }
+  },
+  beforeMount() {
+    this._id = JSON.parse(localStorage.user)._id; // 门店管理员ID
+    this.userName = JSON.parse(localStorage.user).userName;
   }
 };
 </script>
