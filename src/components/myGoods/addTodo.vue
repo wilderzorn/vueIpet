@@ -23,6 +23,17 @@
         <el-form-item label="口味" style="width:400px">
           <el-input type="text" v-model="form.goodsTaste"></el-input>
         </el-form-item>
+        <el-form-item label="分类" style="width:400px">
+          <el-select v-model="form.goodsClassify" placeholder="请选择商品类型">
+            <el-option label="食品" value="0"></el-option>
+            <el-option label="玩具" value="1"></el-option>
+            <el-option label="衣物" value="2"></el-option>
+            <el-option label="宠物窝" value="3"></el-option>
+            <el-option label="洗护" value="4"></el-option>
+            <el-option label="药品" value="5"></el-option>
+            <el-option label="户外" value="6"></el-option>
+          </el-select>
+        </el-form-item>
       </el-form-item>
 
       <el-form-item style="margin-left:100px">
@@ -98,6 +109,7 @@ export default {
         goodsTime: "",
         goodsIntro: "",
         goodsPrice: "",
+        goodsClassify: "",
         goodsImg: []
       }
     };
@@ -119,22 +131,14 @@ export default {
       return isHeadJPG && isHeadLt2M;
     },
     handlePictureCardPreview(file) {
-      //
-      // this.form.goodsImg = file.url;
       this.headDialogVisible = true;
     },
     handleAvatarSuccess(res, file) {
-      console.log(res);
-      console.log(file);
       this.form.goodsImg.push({ bigImg: res.url });
       this.form.goodsImg.push({ smallImg: res.url });
     },
     submitForm(form) {
-      // console.log(this.getAddtodoAsync(form));
-
-      //   console.log(this.data.form);
       console.log(form);
-      
       this.getAddtodoAsync(form);
     }
   }
