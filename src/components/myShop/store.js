@@ -22,7 +22,7 @@ export default {
   actions: {
     async addShopAsync(context, msg) {
       let { shopName, shopLicenceNum, shopLicenceImg, shopAdd, shopLocation, shopCorporate, shopTel, shopImg, shopFeature, shopCommission } = msg
-      let data = await fetch(`/shop/addShopAsync?shopName=${shopName}&shopLicenceNum=${shopLicenceNum}&shopLicenceImg=${shopLicenceImg}&shopAdd=${shopAdd}&shopLocation=${shopLocation}&shopCorporate=${shopCorporate}&shopTel=${shopTel}&shopImg=${shopImg}&shopFeature=${shopFeature}&shopCommission=${shopCommission}`)   // fetch方法跨域请求数据
+      return await fetch(`/shop/addShopAsync?shopName=${shopName}&shopLicenceNum=${shopLicenceNum}&shopLicenceImg=${shopLicenceImg}&shopAdd=${shopAdd}&shopLocation=${shopLocation}&shopCorporate=${shopCorporate}&shopTel=${shopTel}&shopImg=${shopImg}&shopFeature=${shopFeature}&shopCommission=${shopCommission}`).then(res => res.json())   // fetch方法跨域请求数据
     },
     async setShopByIdAsync(context, shopId) {
       let data = await fetch(`/shop/setShopByIdAsync?_id=${shopId.shopId}`)   // fetch方法跨域请求数据
@@ -72,6 +72,15 @@ export default {
     },
     async addIpetForShopAsync(context, msg) {
       return await fetch(`/shop/addIpetForShopAsync`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(msg)
+      }).then(res => res)
+    },
+    async addShopIdForUserAsync(context, msg) {
+      return await fetch(`/users/addShopIdForUserAsync`, {
         method: 'post',
         headers: {
           "Content-Type": "application/json"

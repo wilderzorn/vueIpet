@@ -87,18 +87,23 @@ export default {
         shopImg: "",
         shopFeature: "",
         shopCommission: ""
-      }
+      },
+      _id: ""
     };
   },
+  beforeMount() {
+    this._id = JSON.parse(localStorage.user)._id; // 门店管理员ID
+  },
   methods: {
-    ...mapActions(["addShopAsync"]),
-    addShop(form) {
+    ...mapActions(["addShopAsync", "addShopIdForUserAsync"]),
+    async addShop(form) {
       if (form.shopLicenceImg === "") {
         this.$message.error("请上传营业执照图片");
       } else if (form.shopImg === "") {
         this.$message.error("请上传门店图片");
       } else {
-        this.addShopAsync(form);
+        let shopId = await this.addShopAsync(form);
+        this.addShopIdForUserAsync({ ...shopId, _id: this._id });
         this.$message("门店增加成功");
         this.$router.push({ name: "myShop" });
       }
@@ -112,10 +117,10 @@ export default {
       this.form.shopLicenceImg = file.response.url;
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg"; // 图片格式
+      const isJPG = file.type === "image/jpeg" || "image/png"; // 图片格式
       const isLt2M = file.size / 1024 / 1024 < 10; // 图片大小
       if (!isJPG) {
-        this.$message.error("上传图片只能是 JPG 格式!");
+        this.$message.error("上传图片只能是 JPG或PNG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传图片大小不能超过 10MB!");
@@ -123,10 +128,10 @@ export default {
       return isJPG && isLt2M;
     },
     headEeforeAvatarUpload(file) {
-      const isHeadJPG = file.type === "image/jpeg"; // 图片格式
+      const isHeadJPG = file.type === "image/jpeg" || "image/png"; // 图片格式
       const isHeadLt2M = file.size / 1024 / 1024 < 2; // 图片大小
       if (!isHeadJPG) {
-        this.$message.error("上传图片只能是 JPG 格式!");
+        this.$message.error("上传图片只能是 JPG或PNG 格式!");
       }
       if (!isHeadLt2M) {
         this.$message.error("上传图片大小不能超过 2MB!");
@@ -138,8 +143,6 @@ export default {
       this.headDialogVisible = true;
     },
     headAvatarSuccess(res, file) {
-      console.log(res);
-      console.log(file);
       this.form.shopImg = res.url;
     }
   }
