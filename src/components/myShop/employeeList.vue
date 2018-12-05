@@ -92,7 +92,6 @@ export default {
       this.dialogFormVisible = true; // 显示弹窗
     },
     backShop() {
-      console.log(this.employeeArr);
       this.$router.push({ name: "myShop" });
     },
     async addOneEmployee() {

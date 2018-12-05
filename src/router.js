@@ -112,6 +112,16 @@ export default new Router({
           component: () => import('./components/myShop/goodsList.vue')
         },
         {
+          path: 'serverList/:shopId',
+          name: '_serverList',
+          component: () => import('./components/myShop/serverList.vue')
+        },
+        {
+          path: 'ipetList/:shopId',
+          name: '_ipetList',
+          component: () => import('./components/myShop/ipetList.vue')
+        },
+        {
           path: 'myGoods',
           name: 'myGoods',
           component: () => import('./components/myGoods/app.vue'),
@@ -126,7 +136,6 @@ export default new Router({
           name: 'addTodo',
           component: () => import('./components/myGoods/addTodo.vue')
         },
-
         {
           path: 'myPet',
           name: 'myPet',

@@ -61,6 +61,23 @@ export default {
         body: JSON.stringify(msg)
       }).then(res => res)
     },
-
+    async addServerForShopAsync(context, msg) {
+      return await fetch(`/shop/addServerForShopAsync`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(msg)
+      }).then(res => res)
+    },
+    async addIpetForShopAsync(context, msg) {
+      return await fetch(`/shop/addIpetForShopAsync`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(msg)
+      }).then(res => res)
+    },
   }
 }

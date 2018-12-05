@@ -37,12 +37,12 @@
       </el-table-column>
       <el-table-column label="服务">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="big">查看服务</el-button>
+          <el-button @click="serverClick(scope.row)" type="text" size="big">查看服务</el-button>
         </template>
       </el-table-column>
       <el-table-column label="宠物">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="big">查看宠物</el-button>
+          <el-button @click="ipetClick(scope.row)" type="text" size="big">查看宠物</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作">
@@ -165,7 +165,6 @@ export default {
       }
     },
     shopLicenceImgClick(data) {
-      console.log(data);
       this.shopLicenceImgVisible = true;
     },
     shopImgClick(data) {
@@ -173,6 +172,12 @@ export default {
     },
     goodsClick(data) {
       this.$router.push({ name: "_goodsList", params: { shopId: data._id } });
+    },
+    serverClick(data) {
+      this.$router.push({ name: "_serverList", params: { shopId: data._id } });
+    },
+    ipetClick(data) {
+      this.$router.push({ name: "_ipetList", params: { shopId: data._id } });
     }
   }
 };
