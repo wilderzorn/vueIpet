@@ -27,6 +27,14 @@
         <el-table-column prop="serviceLevel" label="服务员等级" show-overflow-tooltip></el-table-column>
         <el-table-column prop="servicePrice" label="价格" show-overflow-tooltip></el-table-column>
       </el-table>
+      <el-pagination
+        small
+        layout="prev, pager, next"
+        :current-page="curPage"
+        :page-size="eachPage"
+        :total="total"
+        @current-change="handleSizeChange"
+      ></el-pagination>
       <div style="margin-top: 20px">
         <el-button @click="addServer">确认增加</el-button>
         <el-button @click="cancelAdd">取消增加</el-button>
@@ -74,9 +82,17 @@ export default {
       "rows"
     ])
   },
+  watch: {
+    curPage() {
+      this.getAllServicesByPageAsync({ curPage: this.curPage });
+    }
+  },
   methods: {
     ...mapActions("myShopApp", ["setShopByIdAsync", "addServerForShopAsync"]),
-    ...mapActions("myServiceApp", ["getAllServicesByPageAsync"]),
+    ...mapActions("myServiceApp", ["getAllServicesByPageAsync", "setCurPage"]),
+    handleSizeChange(val) {
+      this.setCurPage(val);
+    },
     addEmployee() {
       this.dialogFormVisible = true; // 显示弹窗
     },

@@ -33,6 +33,14 @@
         <el-table-column prop="goodsDate" label="出厂日期" show-overflow-tooltip></el-table-column>
         <el-table-column prop="goodsTime" label="保质期" show-overflow-tooltip></el-table-column>
       </el-table>
+      <el-pagination
+        small
+        layout="prev, pager, next"
+        :current-page="curPage"
+        :page-size="eachPage"
+        :total="total"
+        @current-change="handleSizeChange"
+      ></el-pagination>
       <div style="margin-top: 20px">
         <el-button @click="addGoods">确认增加</el-button>
         <el-button @click="cancelAdd">取消增加</el-button>
@@ -80,6 +88,11 @@ export default {
       "rows"
     ])
   },
+  watch: {
+    curPage() {
+      this.getGoodsByPageAsync({ curPage: this.curPage });
+    }
+  },
   methods: {
     ...mapActions("myShopApp", [
       "setShopByIdAsync",
@@ -88,6 +101,10 @@ export default {
       "addGoodsForShopAsync"
     ]),
     ...mapActions("myGoodsApp", ["getGoodsByPageAsync"]),
+    ...mapMutations("myGoodsApp", ["setCurPage"]),
+    handleSizeChange(val) {
+      this.setCurPage(val);
+    },
     addEmployee() {
       this.dialogFormVisible = true; // 显示弹窗
     },

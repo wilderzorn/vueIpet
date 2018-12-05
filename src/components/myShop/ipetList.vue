@@ -29,6 +29,14 @@
         <el-table-column prop="petsBirthday" label="出生年月" show-overflow-tooltip></el-table-column>
         <el-table-column prop="petsCharacter" label="性格" show-overflow-tooltip></el-table-column>
       </el-table>
+      <el-pagination
+        small
+        layout="prev, pager, next"
+        :current-page="curPage"
+        :page-size="eachPage"
+        :total="total"
+        @current-change="handleSizeChange"
+      ></el-pagination>
       <div style="margin-top: 20px">
         <el-button @click="addIpet">确认增加</el-button>
         <el-button @click="cancelAdd">取消增加</el-button>
@@ -70,9 +78,17 @@ export default {
     ...mapState("myShopApp", ["petAry"]),
     ...mapState("myPetApp", ["curPage", "eachPage", "maxPage", "total", "rows"])
   },
+  watch: {
+    curPage() {
+      this.getAllPetsAsync({ curPage: this.curPage });
+    }
+  },
   methods: {
     ...mapActions("myShopApp", ["setShopByIdAsync", "addIpetForShopAsync"]),
-    ...mapActions("myPetApp", ["getAllPetsAsync"]),
+    ...mapActions("myPetApp", ["getAllPetsAsync", "setCurPage"]),
+    handleSizeChange(val) {
+      this.setCurPage(val);
+    },
     addEmployee() {
       this.dialogFormVisible = true; // 显示弹窗
     },
