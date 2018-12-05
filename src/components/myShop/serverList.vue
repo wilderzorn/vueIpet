@@ -89,7 +89,8 @@ export default {
   },
   methods: {
     ...mapActions("myShopApp", ["setShopByIdAsync", "addServerForShopAsync"]),
-    ...mapActions("myServiceApp", ["getAllServicesByPageAsync", "setCurPage"]),
+    ...mapActions("myServiceApp", ["getAllServicesByPageAsync"]),
+    ...mapMutations("myServiceApp", ["setCurPage"]),
     handleSizeChange(val) {
       this.setCurPage(val);
     },

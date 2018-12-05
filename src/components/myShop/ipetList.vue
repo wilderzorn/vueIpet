@@ -85,7 +85,8 @@ export default {
   },
   methods: {
     ...mapActions("myShopApp", ["setShopByIdAsync", "addIpetForShopAsync"]),
-    ...mapActions("myPetApp", ["getAllPetsAsync", "setCurPage"]),
+    ...mapActions("myPetApp", ["getAllPetsAsync"]),
+    ...mapMutations("myPetApp", ["setCurPage"]),
     handleSizeChange(val) {
       this.setCurPage(val);
     },
