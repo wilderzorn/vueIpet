@@ -66,17 +66,20 @@
         <el-input v-model="form.servicePrice"></el-input>
       </el-form-item>
       <el-form-item label="服务图片">
-        <!-- <el-col :span="1"> -->
         <el-upload
-          class="upload-demo"
-          v-model="form.serviceImg"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          list-type="picture"
+          action="imgs/addImg"
+          list-type="picture-card"
+          :show-file-list="true"
+          :on-preview="handlePictureCardPreview"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+          :limit="1"
         >
-          <el-button type="primary" plain icon="el-icon-edit" >点击上传</el-button>
+          <i class="el-icon-plus"></i>
         </el-upload>
+        <el-dialog :visible.sync="dialogVisible">
+          <img width="100%" :src="form.petsImg" alt>
+        </el-dialog>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">新增</el-button>
@@ -110,13 +113,32 @@ export default {
         serviceTime: "",
         serviceLevel: "",
         servicePrice: "",
-        serviceImg: []
-      }
+        serviceImg: ""
+      },
+      dialogVisible: false
     };
   },
   methods: {
     ...mapActions(["addServicesAsync", "picUpLoadAsync"]),
-
+    //上传图片
+    handlePictureCardPreview(file) {
+      this.form.serviceImg = file.url;
+      this.dialogVisible = true;
+    },
+    handleAvatarSuccess(res, file) {
+      this.form.serviceImg = file.response.url;
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg" || "image/png"; // 图片格式
+      const isLt2M = file.size / 1024 / 1024 < 10; // 图片大小
+      if (!isJPG) {
+        this.$message.error("上传图片只能是 JPG或PNG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 10MB!");
+      }
+      return isJPG && isLt2M;
+    },
     //新增
     onSubmit() {
       let msg = {
@@ -149,7 +171,7 @@ export default {
       // console.log(file.response.id);
       // window.localStorage.url = file.url;
       // window.localStorage._id = file.response.id;
-    },
+    }
     // pic() {
     //   let url = window.localStorage.url;
     //   let _id = window.localStorage._id;
