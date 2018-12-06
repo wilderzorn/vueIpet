@@ -74,7 +74,7 @@
         <i class="el-icon-plus"></i>
       </el-upload>
       <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="form.shopLicenceImg" alt>
+        <img width="100%" :src="form.goodsImg" alt>
       </el-dialog>
     </el-form-item>
 
@@ -110,7 +110,7 @@ export default {
         goodsIntro: "",
         goodsPrice: "",
         goodsClassify: "",
-        goodsImg: []
+        goodsImg: ""
       }
     };
   },
@@ -134,11 +134,9 @@ export default {
       this.headDialogVisible = true;
     },
     handleAvatarSuccess(res, file) {
-      this.form.goodsImg.push({ bigImg: res.url });
-      this.form.goodsImg.push({ smallImg: res.url });
+      this.form.goodsImg = res.url;
     },
     submitForm(form) {
-      console.log(form);
       this.getAddtodoAsync(form);
     }
   }
